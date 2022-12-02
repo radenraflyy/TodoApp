@@ -45,6 +45,15 @@
         )
         </script>
     @endif
+    @if(Session::get('done'))
+        <script>
+            Swal.fire(
+        'Anda Berhasil Menyelesaikan Todo',
+        'Done',
+        'success'
+        )
+        </script>
+    @endif
     
     
 <section class="" style="background-color: #eee;">
@@ -96,11 +105,11 @@
                     <span>{{$todo->status == 1? 'completed' : 'Proses'}}</span>
                   </td>
                   <td class="align-middle">
-                    <a href="/edit/{{$todo->id}}"  data-mdb-toggle="tooltip" title="Edit"><i style="margin-bottom: -15px;"
+                    <a href="{{route('todo.edit', $todo->id)}}"  data-mdb-toggle="tooltip" title="Edit"><i style="margin-bottom: -15px;"
                         class="fas fa-edit me-3 btn btn-success"></i></a>
                     {{-- <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
                         class="fas fa-trash-alt text-danger"></i></a> --}}
-                    <form class="delete ms-5" action="/delete/{{$todo->id}}" method="POST">
+                    <form class="delete ms-5" action="{{route('todo.destroy', $todo->id)}}" method="POST">
                         @method("DELETE")
                         @csrf
                         <button type="submit" style="margin-top: -35px;" class="btn btn-danger" title="Remove" data-mdb-toggle="tooltip"><i
@@ -109,7 +118,7 @@
                     @if($todo ['status'] == 1)
                       <span class="fas fa-circle-check btn btn-primary"></span>
                     @else
-                    <form action="todo/update/{{$todo->id}}" method="POST">
+                    <form action="/todo/update/status/{{$todo->id}}" method="POST">
                       @method('PATCH')
                       @csrf
                       <button style="margin-right: -90px;" type="submit" class="bi bi-hourglass-split btn btn-primary"></button>

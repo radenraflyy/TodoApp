@@ -9,7 +9,7 @@
     </nav>
 
     <div class="mt-5" style="width: 150%; margin-left: -80px;">
-        <form class="form-create mb-4" action="/update/{{$todoe->id}}" method="POST">
+        <form class="form-create mb-4" action="/todo/update/{{$todoe->id}}" method="POST">
         @csrf
             @method("PATCH")
             @if ($errors->any())

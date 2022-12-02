@@ -153,7 +153,7 @@ class TodoController extends Controller
     }
 
     public function updateCompleted($id){
-        Todo::where('id', '=', $id)->update([
+        Todo::where('id', $id)->update([
             'status' => 1,
             'done_time' => \Carbon\Carbon::now(),
         ]);
